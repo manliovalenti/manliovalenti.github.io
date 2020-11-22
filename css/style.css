@@ -1,0 +1,147 @@
+@import url('https://fonts.googleapis.com/css?family=Lato&display=swap');
+
+html, body {
+    margin: 0;
+    padding: 0;
+    overflow-y: scroll;
+}
+
+html {-webkit-text-size-adjust: 100%;}
+
+body {
+	background-color: #ffffff;
+  color: #585858;
+  /* font-family: system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue; */
+  font-size: 16px;
+  margin:0;
+}
+
+a:link {
+    color: #0074D9;
+    text-decoration: none;
+    }
+a:visited {
+    color: #0074D9;
+    text-decoration: none;
+    }
+a:hover {
+    color: #0074D9;
+    text-decoration: underline;
+    }
+a:active {
+    color: #0074D9;
+    text-decoration: none;
+    }
+
+
+p.title{
+  color: #000000;
+  font-family: "Palatino", serif;
+  font-size: 300%;
+  font-weight:400;
+  line-height:2em;
+	margin: 0px 0px 0px 0px;
+}
+p.subtitle{
+	font-size: 120%;
+  font-weight:400;
+	color: #454545;
+	margin: 20px 0px 15px 20px;
+}
+p.heading{
+	font-size: 160%;
+  font-weight:450;
+	color: #4773c4;
+	margin: 40px 0px 15px 0px;
+}
+
+p.text{
+	color: #454545;
+	font-size: 100%;
+  margin: 0px 0px 15px 20pt;
+  text-align: justify;
+}
+
+#container {
+  background-color: #ffffff;
+  margin: 0 auto;
+	overflow: hidden;
+  position: relative;
+  text-align: left;
+	width: 1200px;
+}
+
+#content{
+/*  animation: fadein 1s;
+  -moz-animation: fadein 1s; /* Firefox 
+  -webkit-animation: fadein 1s; /* Safari and Chrome 
+  -o-animation: fadein 1s; /* Opera */
+  background-color: #ffffff;
+  margin: 50px 0 20px 0;
+  padding: 0px;
+  position: relative;
+}
+
+#mail_image {
+  height        : 15px;
+}
+
+
+figure {
+  display: inline-block;
+	float : right;
+  /* border: 1px dotted gray; */
+  width : 270px;
+  margin: 20px; /* adjust as needed */
+}
+figure img {
+  border        : 1px solid;
+	float         : right;
+  height        : auto;
+  width         : 100%;
+  vertical-align: top;
+  margin-bottom: 10px;
+}
+figure figcaption {
+  /* border: 1px dotted blue; */
+	font-size: 90%;
+  float: right;
+  width: 90%;
+  text-align: right;
+}
+
+
+dl {
+	width: 90%;
+	overflow: hidden;
+	padding: 0;
+	margin-left : 20pt;
+}
+dt {
+  float: left;
+	width: 10%;
+	/* adjust the width; make sure the total of both is 100% */
+  padding-bottom: 5px;
+}
+dd {
+	float: left;
+	width: 88%;
+	/* adjust the width; make sure the total of both is 100% */
+	padding-bottom: 5px;
+	margin-left: 2%;
+}
+
+
+@media screen and (max-width:1000px) {
+  #container { width: 100%;}
+}
+
+@media screen and (max-width:800px) {
+  #portrait_image {width: 33.75%;}
+  #portrait_credit {width: 33.75%;}
+}
+
+@media screen and (max-width:680px) {
+  #portrait_image {display: none;}
+  #portrait_credit {display: none;}
+}
