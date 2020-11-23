@@ -77,7 +77,7 @@ p.text{
   -webkit-animation: fadein 1s; /* Safari and Chrome 
   -o-animation: fadein 1s; /* Opera */
   background-color: #ffffff;
-  margin: 50px 0 20px 0;
+  margin: 50px 20px 50px 0;
   padding: 0px;
   position: relative;
 }
@@ -119,16 +119,18 @@ dl {
 }
 dt {
   float: left;
-	width: 10%;
+  width: 15%;
+  min-width: 45px;
+  max-width: 80px;
 	/* adjust the width; make sure the total of both is 100% */
   padding-bottom: 5px;
 }
 dd {
 	float: left;
-	width: 88%;
+	width: 82%;
 	/* adjust the width; make sure the total of both is 100% */
 	padding-bottom: 5px;
-	margin-left: 2%;
+	margin-left: 3%;
 }
 
 
@@ -136,7 +138,7 @@ dd {
   #container { width: 100%;}
 }
 
-@media screen and (max-width:800px) {
+@media screen and (max-width:900px) {
   #portrait_image {width: 33.75%;}
   #portrait_credit {width: 33.75%;}
 }
