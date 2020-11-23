@@ -120,17 +120,17 @@ dl {
 dt {
   float: left;
   width: 15%;
-  min-width: 45px;
+  min-width: 52px;
   max-width: 80px;
 	/* adjust the width; make sure the total of both is 100% */
   padding-bottom: 5px;
 }
 dd {
 	float: left;
-	width: 82%;
+	width: 83%;
 	/* adjust the width; make sure the total of both is 100% */
 	padding-bottom: 5px;
-	margin-left: 3%;
+	margin-left: 2%;
 }
 
 
