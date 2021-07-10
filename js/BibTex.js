@@ -1,5 +1,9 @@
 /**
  * Javascript BibTex Parser v0.1
+ * 
+ * Made just a few very minor changes here and there, 
+ * but this is essentially written by 
+ * 
  * Copyright (c) 2008 Simon Fraser University
  * @author Steve Hannah <shannah at sfu dot ca>
  * 

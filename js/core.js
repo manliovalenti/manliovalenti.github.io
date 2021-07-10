@@ -1,3 +1,37 @@
+/** 
+ * 
+ * Copyright (c) 2021 Manlio Valenti
+ * 
+ * Based on the following github project:
+ * https://github.com/enric1994/bibtexonline
+ * 
+ * Copyright (c) 2020 Enric Moreu
+ * 
+ *  
+ * MIT License
+ * 
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ * 
+*/
+
+
+
 // VARIABLES
 
 var papers = document.getElementById("papers");
@@ -16,6 +50,7 @@ var htmlify = function (str) {
         .replace(/\\'e/g, '&eacute;')
         .replace(/\\'\{e\}/g, '&eacute;')
         .replace(/\\'a/g, '&aacute;')
+        .replace(/\\`a/g, '&agrave;')
         .replace(/\\'A/g, '&Aacute;')
         .replace(/\\"o/g, '&ouml;')
         .replace(/\\"u/g, '&uuml;')
@@ -67,16 +102,22 @@ function authors2html(authorData, vformat) {
     if (!authorData) { return authorsStr; }
     for (var index = 0; index < authorData.length; index++) {
         if (vformat == 'mla' && index > 0) { authorsStr += " et al"; break; } // MLA: Azcona, David, et al. 
-        if (index > 0) { authorsStr += ", "; } // For more than one author, separate them with a comma
+        if (index > 0 ) { 
+            if (vformat == 'amslike' && authorData.length==2 ) {authorsStr += " ";} // separate with a comma only if there are more than 2 authors
+            else {authorsStr += ", ";} // For more than one author, separate them with a comma
+        } 
         if (index > 0 && index == authorData.length - 1) { // Before adding the last author, add '&'' or 'and' if needed
             if (vformat == 'apa') { authorsStr += "& "; } // & Smeaton, A.
-            else if (vformat == 'chicago' || vformat == 'harvard') { authorsStr += "and "; } // and Alan Smeaton
+            else if (vformat == 'chicago' || vformat == 'amslike' || vformat == 'harvard') { authorsStr += "and "; } // and Alan Smeaton
         }
         // Get author
         author = authorData[index];
         if (vformat == 'mla' || vformat == 'chicago') {
             if (index == 0) { authorsStr += author.last + ", " + author.first; } // First: Azcona, David
             else { authorsStr += author.first + ((author.first && author.last) ? ", " : "") + author.last; } // Rest: Piyush Arora
+        }
+        else if (vformat == 'amslike' ) {
+            authorsStr += author.first + " " + author.last; 
         }
         else {
             initials = get_initials(author.first)
@@ -100,9 +141,9 @@ function howpublished2readable(howpublished){
 // Function to format the citation based on the format selected
 function format(data) {
 
-    // Format value: MLA, APA, Chicago, Harvard, Vancouver
+    // Format value: MLA, APA, Chicago, Harvard, Vancouver, AMSLIKE
 //    var formatValue = formatDropdown.options[formatDropdown.selectedIndex].value;
-    var formatValue = "chicago";
+    var formatValue = "amslike";
 
     // Format authors
     var authors = authors2html(data.author, formatValue);
@@ -141,12 +182,24 @@ function format(data) {
         }
         else if (formatValue == 'chicago') {
             return authors +
-                ". \"" + title + "\"." + 
+                ". \"" + title + "\". " + 
                 "<em>" + journal + "<\/em>" + 
                 ((data.volume) ? " " + data.volume : "") +
-                ((data.number) ? ", no." + data.number : "") + 
-                " (" + year + ")" + 
-                ((data.pages) ? ": " + data.pages : "") +
+                ((data.number) ? ", no.&nbsp;" + data.number : "") + 
+                "&nbsp;(" + year + ")" + 
+                ((data.pages) ? ":&nbsp;" + data.pages : "") +
+                ((data.doi) ? ", doi:&nbsp;" + data.doi : "") +                
+                ".";
+        }
+        else if (formatValue == 'amslike') {
+            return authors +
+                ", <em>" + title + "<\/em>" + 
+                ", " + journal + "" + 
+                ((data.volume) ? " " + data.volume : "") +
+                "&nbsp;(" + year + ")" + 
+                ((data.number) ? ", no.&nbsp;" + data.number : "") + 
+                ((data.pages) ? ",&nbsp;" + data.pages : "") +
+                ((data.doi) ? ", doi:&nbsp;" + data.doi : "") +                
                 ".";
         }
         else if (formatValue == 'harvard') {
@@ -198,6 +251,15 @@ function format(data) {
                 ((data.publisher) ? " " + data.publisher + "." : "");
         }
         else if (formatValue == 'chicago') {
+            return authors + 
+                ". \"" + title + ".\" " + 
+                ". In <em>" + booktitle + "<\/em>" +
+                ((data.pages) ? " (pp. " + data.pages + ")" : "") + 
+                "." +
+                ((data.publisher) ? " " + data.publisher + ", ": "") +
+                year + ".";
+        }
+        else if (formatValue == 'amslike') {
             return authors + 
                 ". \"" + title + ".\" " + 
                 ". In <em>" + booktitle + "<\/em>" +
@@ -259,6 +321,13 @@ function format(data) {
                 publisher + ", " + 
                 year + ".";
         }
+        else if (formatValue == 'amslike') {
+            return authors + 
+                ". <em>" + title + "<\/em>." +
+                ((data.volume) ? " Vol. " + data.volume + ". ": "") + 
+                publisher + ", " + 
+                year + ".";
+        }
         else if (formatValue == 'harvard') {
             return authors + " " +
                 year + ". " + 
@@ -300,6 +369,12 @@ function format(data) {
                 "PhD diss., " + school + ", " + 
                 year + ". ";
         }
+        else if (formatValue == 'amslike') {
+            return authors + 
+                ". \"" + title + ".\" " + 
+                "PhD diss., " + school + ", " + 
+                year + ". ";
+        }
         else if (formatValue == 'harvard') {
             return authors + 
                 ", " + year + 
@@ -312,13 +387,28 @@ function format(data) {
                 " (Doctoral dissertation, " + school + ").";
         }
     }
+
+    // UNPUBLISHED
+    // Required fields: author, title.
+    // Optional fields: note.
+
+
+    else if (data.entryType == 'unpublished') {
+        authors = ((authors) ? authors : "Authors are required!");
+        var title = ((data.title) ? data.title : "<strong style='color:red;'>Title is required!</strong>");
+        return authors +
+            ", <em>" + title + "<\/em>," + 
+            ((data.note) ? " " + data.note : "") +
+            ".";
+    }
+
     // MISC
     // Use this type when nothing else fits. A warning will be issued if all optional fields are empty 
     // (i.e., the entire entry is empty or has only ignored fields).
     // Required fields: none.
     // Optional fields: author, title, howpublished, month, year, note.
     else if (data.entryType == 'misc') {
-        if (formatValue == 'mla' || formatValue == 'chicago') {
+        if (formatValue == 'mla' || formatValue == 'chicago' || formatValue == 'amslike' ) {
             return ((authors) ? authors + ". ": "") + 
                 ((data.title) ? "\"" + data.title + ".\" ": "") +  
                 ((data.howpublished) ? howpublished2readable(data.howpublished) + ". ": "") +
@@ -345,6 +435,8 @@ function format(data) {
 // Function called to convert BibTeX to other format
 async function main() {
 
+
+
     var contents = await fetch('bib/bibliography.bib').then(response => response.text());
 
     // Reset output
@@ -366,6 +458,7 @@ async function main() {
     bibtex.parse();
     console.log(bibtex);
 
+
     // For each parsed citation
     for (var i in bibtex.data) {
 
@@ -376,8 +469,19 @@ async function main() {
         var output = format(citation);
         
         // Show
-        // toInput.value += htmlify(output) + "\n\n";
-        papers.innerHTML += "<li><p>"+ htmlify(output) + "</li> <a download=\""+ citation["cite"] +".tex\" href=\"data:application/octet-stream;charset=utf-8,"+ encodeURIComponent(citation["originalContent"]) + " \">bibtex</a> </p>";
+
+        var t = "<li><p style=\"display: inline\">"+ htmlify(output) + "<pre style=\"display: inline\">";
+        if ( citation.hasOwnProperty("arxiv") ) {
+            t += " <a href=\""+citation["arxiv"] +"\">arXiv</a>";
+        }
+
+        if ( citation["entryType"] !== "unpublished" ) {
+            t += " <a download=\""+ citation["cite"] +".bib\" href=\"data:application/octet-stream;charset=utf-8,"+ encodeURIComponent(citation["originalContent"]) + " \">bib</a>";
+        }
+        t += "</pre></p></li>";
+
+        papers.innerHTML += t;
+
     }
 }
 
