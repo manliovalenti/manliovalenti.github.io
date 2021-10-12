@@ -434,9 +434,7 @@ function format(data) {
 
 // Function called to convert BibTeX to other format
 async function main() {
-
-
-
+    
     var contents = await fetch('bib/bibliography.bib').then(response => response.text());
 
     // Reset output
