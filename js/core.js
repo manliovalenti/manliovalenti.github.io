@@ -117,7 +117,7 @@ function authors2html(authorData, vformat) {
             else { authorsStr += author.first + ((author.first && author.last) ? ", " : "") + author.last; } // Rest: Piyush Arora
         }
         else if (vformat == 'amslike' ) {
-            authorsStr += author.first + " " + author.last; 
+            authorsStr += author.first + " " + author.last;
         }
         else {
             initials = get_initials(author.first)
