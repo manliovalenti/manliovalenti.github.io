@@ -481,6 +481,7 @@ async function main() {
         papers.innerHTML += t;
 
     }
+    MathJax.typesetPromise();
 }
 
 main();

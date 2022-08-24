@@ -2,101 +2,121 @@
 <html>
 <head>
 	<!-- MathJax-script -->
+	<script type="text/x-mathjax-config">
+		MathJax = {
+			tex: {
+				inlineMath: [['$', '$'], ["\\(", "\\)"]],
+				processEscapes: true,
+			}
+		}
+	</script>
 	<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
 	<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-
-
+	
+	<script>
+		window.MathJax = {
+			tex: {
+				inlineMath: [['$', '$'], ['\\(', '\\)']],
+				packages: {'[+]': ['boldsymbol']}
+			},
+			loader: {load: ['[tex]/boldsymbol']},
+		};
+	</script>
+	
 	<!-- Google tag -->
 	<meta name="google-site-verification" content="3WgBucOOW8lgU-InTJ2NR7xOpG1Lr8GMJHz7SQK-mSI" />
-
+	
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="css/style.css">
 	<title>Manlio Valenti</title>
 </head>
 <body>
-
-<div id="container">
-
-	<div id="content">
-
-		<figure title="&quot;Spariggia&quot; is a Sicilian word meaning &quot;not paired&quot;. When you have two pairs in poker, the fifth card is the spariggia one.">
-			<img src='images/home.jpg'/>
-			<figcaption>Thanks to my Mathematical Analysis 1 students for the photorealistic sketch.</figcaption>
-		</figure>
-
-
-		<p class="title">
-		Manlio Valenti</p>
-
-		<p class="subtitle">
-		Visiting Assistant Professor<br>
-		Department of Mathematics<br>
-		University of Wisconsin - Madison<br><br>
-
-		Email: <img id="image" src="images/line.png" width="250">
-		</p>
-
-		
-
-		<p class="heading">Research interests</p>
-
-		 
-		<p class="text">My research is focused on computable analysis, Weihrauch reducibility and (effective) descriptive set theory. <!--My work explores the uniform computational strength of principles that, from the point of view of reverse mathematics, lie at the level of \( \mathrm{ATR}_0 \). I find the questions about the interactions between computability and classic analysis (e.g. measure theory or topology) particularly relevant.</p>
-		
-		<p class="text">
-		In particular, I studied the open and clopen Ramsey theorems and the problem of finding descending sequences in an ill-founded linear order (and variants thereof). I also worked in algorithmic dimension theory, and, in particular, on characterizing the descriptive complexity of closed Salem sets, which are sets with equal Hausdorff and Fourier dimension. -->
-	</p>	
-
-		
-
-		<p class="heading">Papers</p>
-
-		<ul id="papers"></ul>
 	
-		<p class="heading">Selected talks</p>
-		<dl>
-			<dt>05.2022</dt>
-			<dd>New operators on Weihrauch degrees and their applications to separation results, Leeds Computability Days, invited talk </dd>
-			<dt>03.2022</dt>
-			<dd>The first-order part of Weihrauch degrees, Online Logic Seminar, invited talk </dd>
-			<dt>07.2021</dt>
-			<dd>Algebraic properties of the first-order part of a problem, LC 2021</dd>
-			<dt>07.2021</dt>
-			<dd>The Cantor-Bendixon theorem in the Weihrauch lattice, CiE 2021</dd>
-			<dt>06.2021</dt>
-			<dd>The uniform strength of descending sequences, ASL North American Annual Meeting 2021, special session in Computability Theory, invited talk.</dd>
-			<dt>04.2021</dt>
-			<dd>Ill-founded orders and Weihrauch degrees, Oberwolfach Workshop 2117 "Computability theory"</dd>
-			<dt>11.2020</dt>
-			<dd>On the descriptive complexity of Fourier dimension and Salem sets, CTA computability seminar, invited talk.</dd>
-			<dt>10.2020</dt>
-			<dd>Fractal dimensions and descriptive set theory, PennState Logic Seminar, invited talk.</dd>
-			<dt>09.2020</dt>
-			<dd>Computing the Fourier dimension, CCC 2020</dd>
-			<dt>07.2020</dt>
-			<dd>Finding descending sequences in ill-founded linear orders, CiE 2020</dd>
-			<dt>10.2019</dt>
-			<dd>The open and clopen Ramsey theorems in the Weihrauch lattice, UW-Madison Logic Seminar, invited talk</dd>
-			<dt>07.2019</dt>
-			<dd>The open and clopen Ramsey theorems in the Weihrauch lattice, CiE 2019</dd>
-		</dl>
-
-
-		<p class="heading">Teaching</p>
-		<ul>
-			<li><p>Teaching Assistant - Mathematical analysis 2 - B.Sc. Civil Engineering (Udine) 2021/2022</p></li>
-			<li><p>Mathematical Analysis - B.Sc. Imaging and radiotherapy techniques (Udine) 2021/2022</p></li>
-			<li><p>Teaching Assistant - Mathematical analysis 1 - B.Sc. Industrial Engineering (Udine) 2021/2022</p></li>
-			<li><p>Teaching Assistant - Mathematical analysis 1 - B.Sc. Mathematics (Udine) 2018/2019</p></li>
-			<li><p>Teaching Assistant - Mathematical analysis 1 - B.Sc. Mathematics (Udine) 2019/2020</p></li>
-		</ul>
-	</div>
-
-</div>
-
-<script src="js/BibTex.js"></script>
-<script src="js/core.js"></script>
-
-
-</body>
-</html>
+	<div id="container">
+		
+		<div id="content">
+			
+			<figure title="&quot;Spariggia&quot; is a Sicilian word meaning &quot;not paired&quot;. When you have two pairs in poker, the fifth card is the spariggia one.">
+				<img src='images/home.jpg'/>
+				<figcaption>Thanks to my Mathematical Analysis 1 students for the photorealistic sketch.</figcaption>
+			</figure>
+			
+			
+			<p class="title">
+				Manlio Valenti</p>
+				
+				<p class="subtitle">
+					Visiting Assistant Professor<br>
+					Department of Mathematics<br>
+					University of Wisconsin - Madison<br><br>
+					
+					Email: <img id="image" src="images/line.png" width="250">
+				</p>
+				
+				
+				
+				<p class="heading">Research interests</p>
+				
+				
+				<p class="text">My research is focused on computable analysis, Weihrauch reducibility and (effective) descriptive set theory. <!--My work explores the uniform computational strength of principles that, from the point of view of reverse mathematics, lie at the level of \( \mathrm{ATR}_0 \). I find the questions about the interactions between computability and classic analysis (e.g. measure theory or topology) particularly relevant.</p>
+					
+					<p class="text">
+						In particular, I studied the open and clopen Ramsey theorems and the problem of finding descending sequences in an ill-founded linear order (and variants thereof). I also worked in algorithmic dimension theory, and, in particular, on characterizing the descriptive complexity of closed Salem sets, which are sets with equal Hausdorff and Fourier dimension. -->
+					</p>	
+					
+					
+					<p style="display: inline">Vittorio Cipriani, Alberto Marcone, and Manlio Valenti, <em>The Weihrauch lattice at the level of $\boldsymbol\Pi^1_1\mathsf{-CA}_0$: the Cantor-Bendixson theorem</em>, In preparation.<pre style="display: inline"></pre></p>
+					
+					<p class="heading">Papers</p>
+					
+					<ul id="papers"></ul>
+					
+					
+					
+					<p class="heading">Selected talks</p>
+					<dl>
+						<dt>05.2022</dt>
+						<dd>New operators on Weihrauch degrees and their applications to separation results, Leeds Computability Days, invited talk </dd>
+						<dt>03.2022</dt>
+						<dd>The first-order part of Weihrauch degrees, Online Logic Seminar, invited talk </dd>
+						<dt>07.2021</dt>
+						<dd>Algebraic properties of the first-order part of a problem, LC 2021</dd>
+						<dt>07.2021</dt>
+						<dd>The Cantor-Bendixon theorem in the Weihrauch lattice, CiE 2021</dd>
+						<dt>06.2021</dt>
+						<dd>The uniform strength of descending sequences, ASL North American Annual Meeting 2021, special session in Computability Theory, invited talk.</dd>
+						<dt>04.2021</dt>
+						<dd>Ill-founded orders and Weihrauch degrees, Oberwolfach Workshop 2117 "Computability theory"</dd>
+						<dt>11.2020</dt>
+						<dd>On the descriptive complexity of Fourier dimension and Salem sets, CTA computability seminar, invited talk.</dd>
+						<dt>10.2020</dt>
+						<dd>Fractal dimensions and descriptive set theory, PennState Logic Seminar, invited talk.</dd>
+						<dt>09.2020</dt>
+						<dd>Computing the Fourier dimension, CCC 2020</dd>
+						<dt>07.2020</dt>
+						<dd>Finding descending sequences in ill-founded linear orders, CiE 2020</dd>
+						<dt>10.2019</dt>
+						<dd>The open and clopen Ramsey theorems in the Weihrauch lattice, UW-Madison Logic Seminar, invited talk</dd>
+						<dt>07.2019</dt>
+						<dd>The open and clopen Ramsey theorems in the Weihrauch lattice, CiE 2019</dd>
+					</dl>
+					
+					
+					<p class="heading">Teaching</p>
+					<ul>
+						<li><p>Teaching Assistant - Mathematical analysis 2 - B.Sc. Civil Engineering (Udine) 2021/2022</p></li>
+						<li><p>Mathematical Analysis - B.Sc. Imaging and radiotherapy techniques (Udine) 2021/2022</p></li>
+						<li><p>Teaching Assistant - Mathematical analysis 1 - B.Sc. Industrial Engineering (Udine) 2021/2022</p></li>
+						<li><p>Teaching Assistant - Mathematical analysis 1 - B.Sc. Mathematics (Udine) 2018/2019</p></li>
+						<li><p>Teaching Assistant - Mathematical analysis 1 - B.Sc. Mathematics (Udine) 2019/2020</p></li>
+					</ul>
+				</div>
+				
+			</div>
+			
+			<script src="js/BibTex.js"></script>
+			<script src="js/core.js"></script>
+			
+		</body>
+		</html>
+		
