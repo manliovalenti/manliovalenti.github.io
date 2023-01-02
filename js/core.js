@@ -35,6 +35,7 @@
 // VARIABLES
 
 var papers = document.getElementById("papers");
+var thesis = document.getElementById("thesis");
 
 
 // HELPERS
@@ -199,7 +200,8 @@ function format(data) {
                 "&nbsp;(" + year + ")" + 
                 ((data.number) ? ", no.&nbsp;" + data.number : "") + 
                 ((data.pages) ? ",&nbsp;" + data.pages : "") +
-                ((data.doi) ? ", doi:&nbsp;" + data.doi : "") +                
+                ((data.doi && data.url) ? ", doi:&nbsp;<a href=\""+ data.url +"\">"+ data.doi + "</a>" : "") +                
+//                ((data.doi) ? ", doi:&nbsp;" + data.doi : "") +                
                 ".";
         }
         else if (formatValue == 'harvard') {
@@ -432,6 +434,32 @@ function format(data) {
     }
 }
 
+async function getThesis() {
+    var contents = await fetch('bib/thesis.bib').then(response => response.text());
+
+    // If empty, return nothing!
+    if (contents == '') {
+        console.log('Contents are empty!');
+        return;
+    }
+
+    // BIBTEX PARSER
+    var bibtex = new BibTex();
+    bibtex.content = contents;
+    bibtex.parse();
+    console.log(bibtex);
+
+    var citation = bibtex.data[0];
+
+    // Format citation
+    // Citation style: amslike
+    var output = format(citation);
+    
+    thesis.innerHTML = htmlify(output).substring(82,);
+}
+
+
+
 // Function called to convert BibTeX to other format
 async function main() {
     
@@ -464,6 +492,7 @@ async function main() {
         var citation = bibtex.data[i];
 
         // Format citation
+        // Citation style: amslike
         var output = format(citation);
         
         // Show
@@ -481,7 +510,7 @@ async function main() {
         papers.innerHTML += t;
 
     }
-    MathJax.typesetPromise();
 }
 
 main();
+getThesis();
