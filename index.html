@@ -11,17 +11,6 @@
 		}
 	</script>
 	<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-	<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-	
-	<script>
-		window.MathJax = {
-			tex: {
-				inlineMath: [['$', '$'], ['\\(', '\\)']],
-				packages: {'[+]': ['boldsymbol']}
-			},
-			loader: {load: ['[tex]/boldsymbol']},
-		};
-	</script>
 	
 	<!-- Google tag -->
 	<meta name="google-site-verification" content="3WgBucOOW8lgU-InTJ2NR7xOpG1Lr8GMJHz7SQK-mSI" />
@@ -124,7 +113,16 @@
 			
 			<script src="js/BibTex.js"></script>
 			<script src="js/core.js"></script>
-					
+			<script>
+				window.MathJax = {
+					tex: {
+						inlineMath: [['$', '$'], ['\\(', '\\)']],
+						packages: {'[+]': ['boldsymbol']}
+					},
+					loader: {load: ['[tex]/boldsymbol']},
+				};
+			</script>
+			<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 		</body>
 		</html>
 		
