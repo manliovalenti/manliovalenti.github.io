@@ -11,17 +11,6 @@
 		}
 	</script>
 	<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-	<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-	
-	<script>
-		window.MathJax = {
-			tex: {
-				inlineMath: [['$', '$'], ['\\(', '\\)']],
-				packages: {'[+]': ['boldsymbol']}
-			},
-			loader: {load: ['[tex]/boldsymbol']},
-		};
-	</script>
 	
 	<!-- Google tag -->
 	<meta name="google-site-verification" content="3WgBucOOW8lgU-InTJ2NR7xOpG1Lr8GMJHz7SQK-mSI" />
@@ -109,6 +98,7 @@
 					
 					<p class="heading">Teaching</p>
 					<ul>
+						<li><p><a href="https://canvas.wisc.edu/courses/335062">Math 975 - Seminar in Foundations - Priority arguments </a>  - UW-Madison 2022/2023</p></li>			
 						<li><p><a href="https://canvas.wisc.edu/courses/334670">Math/CompSci/Stat 475 Introduction to Combinatorics</a>  - UW-Madison 2022/2023</p></li>
 						<li><p><a href="https://canvas.wisc.edu/courses/322048">Math 570 Fundamentals of Set Theory</a>  - UW-Madison 2022/2023</p></li>
 						<li><p><a href="https://canvas.wisc.edu/courses/325799">Math 990 Reading and Research</a>  - UW-Madison 2022/2023</p></li>
@@ -124,7 +114,16 @@
 			
 			<script src="js/BibTex.js"></script>
 			<script src="js/core.js"></script>
-					
+			<script>
+				window.MathJax = {
+					tex: {
+						inlineMath: [['$', '$'], ['\\(', '\\)']],
+						packages: {'[+]': ['boldsymbol']}
+					},
+					loader: {load: ['[tex]/boldsymbol']},
+				};
+			</script>
+			<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 		</body>
 		</html>
 		
