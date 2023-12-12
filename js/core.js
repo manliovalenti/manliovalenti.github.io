@@ -56,8 +56,8 @@ var htmlify = function (str) {
         .replace(/\\"o/g, '&ouml;')
         .replace(/\\"u/g, '&uuml;')
         .replace(/\\ss\{\}/g, '&szlig;')
-        .replace(/\{/g, '')
-        .replace(/\}/g, '')
+        // .replace(/\{/g, '')
+        // .replace(/\}/g, '')
         .replace(/\\&/g, '&')
         .replace(/--/g, '&ndash;');
     return str;
@@ -447,7 +447,6 @@ async function getThesis() {
     var bibtex = new BibTex();
     bibtex.content = contents;
     bibtex.parse();
-    console.log(bibtex);
 
     var citation = bibtex.data[0];
 
@@ -482,7 +481,6 @@ async function main() {
     var bibtex = new BibTex();
     bibtex.content = contents;
     bibtex.parse();
-    console.log(bibtex);
 
 
     // For each parsed citation
@@ -494,7 +492,8 @@ async function main() {
         // Format citation
         // Citation style: amslike
         var output = format(citation);
-        
+        // console.log('output: ' + output);
+        // console.log('htmlify:' + htmlify(output));
         // Show
 
         var t = "<li><p style=\"display: inline\">"+ htmlify(output) + "<pre style=\"display: inline\">";
@@ -510,6 +509,9 @@ async function main() {
         papers.innerHTML += t;
 
     }
+ 
+    MathJax.typeset();
+//    console.log(papers.innerHTML)
 }
 
 main();

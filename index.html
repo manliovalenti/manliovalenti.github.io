@@ -2,14 +2,16 @@
 <html>
 <head>
 	<!-- MathJax-script -->
-	<script type="text/x-mathjax-config">
+	<script>
 		MathJax = {
 			tex: {
-				inlineMath: [['$', '$'], ["\\(", "\\)"]],
-				processEscapes: true,
-			}
-		}
+				inlineMath: [['$', '$'], ['\\(', '\\)']],
+				packages: {'[+]': ['boldsymbol']}
+			},
+			loader: {load: ['[tex]/boldsymbol']},
+		};
 	</script>
+	<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 	<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
 	
 	<!-- Google tag -->
@@ -36,36 +38,36 @@
 				
 				<p class="subtitle">
 					<!-- Visiting Assistant Professor<br>
-					Department of Mathematics<br>
-					University of Wisconsin - Madison<br><br> -->
-					Lecturer<br>
-					Faculty of Science and Engineering<br>
-					Swansea University<br><br>
+						Department of Mathematics<br>
+						University of Wisconsin - Madison<br><br> -->
+						Lecturer<br>
+						Faculty of Science and Engineering<br>
+						Swansea University<br><br>
+						
+						Email: <img id="image" src="images/line.png" width="250">
+					</p>
 					
-					Email: <img id="image" src="images/line.png" width="250">
-				</p>
-				
-				
-				
-				<p class="heading">Research interests</p>
-				
-				
-				<p class="text">My research is focused on computable analysis, Weihrauch reducibility, and (effective) descriptive set theory.</p>	
 					
-										
+					
+					<p class="heading">Research interests</p>
+					
+					
+					<p class="text">My research is focused on computable analysis, Weihrauch reducibility, and (effective) descriptive set theory.</p>	
+					
+					
 					<p class="heading">Papers</p>
 					
 					<ol id="papers"></ol>
-
+					
 					<p style="margin-top:0.8cm;"> <b>Ph.D. Thesis: </b> A journey through computability, topology and analysis, 2021. </br>
 						An abstract of the thesis has been published in 
 						<p class="text" id="thesis"></p>
-
+						
 						Most of the results in my thesis have been collected in the papers 4 to 8, so please refer to the papers instead. 
 					</p>
-
 					
-
+					
+					
 					
 					
 					<p class="heading">Selected talks</p>
@@ -103,7 +105,7 @@
 						<dt>07.2019</dt>
 						<dd>The open and clopen Ramsey theorems in the Weihrauch lattice, CiE 2019</dd>
 					</dl>
-										
+					
 					<p class="heading">Teaching</p>
 					<ul>
 						<li><p><a href="https://canvas.wisc.edu/courses/335062">Math 975 - Seminar in Foundations - Priority arguments </a>  - UW-Madison 2022/2023</p></li>			
@@ -122,16 +124,7 @@
 			
 			<script src="js/BibTex.js"></script>
 			<script src="js/core.js"></script>
-			<script>
-				window.MathJax = {
-					tex: {
-						inlineMath: [['$', '$'], ['\\(', '\\)']],
-						packages: {'[+]': ['boldsymbol']}
-					},
-					loader: {load: ['[tex]/boldsymbol']},
-				};
-			</script>
-			<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
 		</body>
 		</html>
 		
