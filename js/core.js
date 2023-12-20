@@ -400,6 +400,7 @@ function format(data) {
         var title = ((data.title) ? data.title : "<strong style='color:red;'>Title is required!</strong>");
         return authors +
             ", <em>" + title + "<\/em>," + 
+            ((data.year) ? " " + data.year + "," : "") + 
             ((data.note) ? " " + data.note : "") +
             ".";
     }
