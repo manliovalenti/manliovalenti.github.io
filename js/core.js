@@ -34,9 +34,8 @@
 
 // VARIABLES
 
-var papers = document.getElementById("papers");
 var thesis = document.getElementById("thesis");
-
+var bibliography;
 
 // HELPERS
 
@@ -118,7 +117,7 @@ function authors2html(authorData, vformat) {
             else { authorsStr += author.first + ((author.first && author.last) ? ", " : "") + author.last; } // Rest: Piyush Arora
         }
         else if (vformat == 'amslike' ) {
-            authorsStr += author.first + " " + author.last;
+            authorsStr += author.first + " " + author.von + " " + author.last;
         }
         else {
             initials = get_initials(author.first)
@@ -400,8 +399,8 @@ function format(data) {
         var title = ((data.title) ? data.title : "<strong style='color:red;'>Title is required!</strong>");
         return authors +
             ", <em>" + title + "<\/em>," + 
-            ((data.year) ? " " + data.year + "," : "") + 
-            ((data.note) ? " " + data.note : "") +
+            ((data.year) ? " " + data.year : "") + 
+            ((data.note) ? ", " + data.note : "") +
             ".";
     }
 
@@ -436,7 +435,7 @@ function format(data) {
 }
 
 async function getThesis() {
-    var contents = await fetch('bib/thesis.bib').then(response => response.text());
+    let contents = await fetch('bib/thesis.bib').then(response => response.text());
 
     // If empty, return nothing!
     if (contents == '') {
@@ -445,32 +444,82 @@ async function getThesis() {
     }
 
     // BIBTEX PARSER
-    var bibtex = new BibTex();
+    let bibtex = new BibTex();
     bibtex.content = contents;
     bibtex.parse();
 
-    var citation = bibtex.data[0];
+    let citation = bibtex.data[0];
 
     // Format citation
     // Citation style: amslike
-    var output = format(citation);
+    let output = format(citation);
+
+    thesis.innerHTML = '<b>Ph.D. Thesis: </b> A journey through computability, topology and analysis, 2021. </br>\
+		An abstract of the thesis has been published in <br><br>\
+		<p class="text">' +
+            htmlify(output).substring(82,) +
+        '</p>\
+		Most of the results in my thesis have been collected in the papers '+ getIndex('SVFirstOrderPart')+ ' to ' + getIndex('MVRamsey') + ', so please refer to the papers instead.';
     
-    thesis.innerHTML = htmlify(output).substring(82,);
+    console.log(thesis.innerHTML);
 }
 
 
 
-// Function called to convert BibTeX to other format
-async function main() {
+function addEntry(citation) {
+
+    let t = "<p style=\"display: inline\">"+ htmlify(format(citation)) + "<pre style=\"display: inline\">";
+    if ( citation.hasOwnProperty("arxiv") ) {
+        t += " <a href=\""+citation["arxiv"] +"\">arXiv</a>";
+    }
+
+    if ( citation["entryType"] !== "unpublished" ) {
+        t += " <a download=\""+ citation["cite"] +".bib\" href=\"data:application/octet-stream;charset=utf-8,"+ encodeURIComponent(citation["originalContent"]) + " \">bib</a>";
+    }
+    t += "</pre></p>";
+
+   return t;
+}
+
+function getIndex(key) {
+    for (let i in bibliography.data) 
+        if (bibliography.data[i].cite == key) 
+            return parseInt(i)+1;
+}
+
+
+function getPapers() {
+    
+    (async() => {
+        while(typeof bibliography == "undefined")
+            await new Promise(resolve => setTimeout(resolve, 250));
+
+        // Reset output
+        // toInput.value = '';
+        var papers = document.getElementById("papers");
+        papers.innerHTML = '';
+
+        // For each parsed citation
+        for (let i in bibliography.data) {
+
+            // Get citation
+            let citation = bibliography.data[i];
+            papers.innerHTML += "<li>" +  addEntry(citation) ;
+
+            if (citation.cite == 'GPVDescSeq') {
+                papers.innerHTML += '<b>WARNING</b>: Please check the <b>errata</b> provided with the arxiv version.<br><br>'
+                // The published version of this paper contains the claim that $\\mathsf{DS} \\equiv_{\\mathrm{W}} \\mathsf{BS}$. This statement is false and the separation has been proved in '+getIndex('GPVweaknessDS') + '. Please check the <b>errata</b> provided with the arxiv version.  <br><br>';
+            }
+
+            papers.innerHTML += "</li>";
+        }
+        MathJax.typeset();
+    })();
+}
+
+async function init() {
     
     var contents = await fetch('bib/bibliography.bib').then(response => response.text());
-
-    // Reset output
-    // toInput.value = '';
-    papers.innerHTML = '';
-
-    // Contents to format
-    
 
     // If empty, return nothing!
     if (contents == '') {
@@ -479,41 +528,70 @@ async function main() {
     }
 
     // BIBTEX PARSER
-    var bibtex = new BibTex();
-    bibtex.content = contents;
-    bibtex.parse();
-
-
-    // For each parsed citation
-    for (var i in bibtex.data) {
-
-        // Get citation
-        var citation = bibtex.data[i];
-
-        // Format citation
-        // Citation style: amslike
-        var output = format(citation);
-        // console.log('output: ' + output);
-        // console.log('htmlify:' + htmlify(output));
-        // Show
-
-        var t = "<li><p style=\"display: inline\">"+ htmlify(output) + "<pre style=\"display: inline\">";
-        if ( citation.hasOwnProperty("arxiv") ) {
-            t += " <a href=\""+citation["arxiv"] +"\">arXiv</a>";
-        }
-
-        if ( citation["entryType"] !== "unpublished" ) {
-            t += " <a download=\""+ citation["cite"] +".bib\" href=\"data:application/octet-stream;charset=utf-8,"+ encodeURIComponent(citation["originalContent"]) + " \">bib</a>";
-        }
-        t += "</pre></p></li>";
-
-        papers.innerHTML += t;
-
-    }
- 
-    MathJax.typeset();
-//    console.log(papers.innerHTML)
+    bibliography = new BibTex();
+    bibliography.content = contents;
+    bibliography.parse();
 }
 
-main();
+
+
+// // Function called to convert BibTeX to other format
+// async function main() {
+    
+//     var contents = await fetch('bib/bibliography.bib').then(response => response.text());
+
+//     // Reset output
+//     // toInput.value = '';
+//     papers.innerHTML = '';
+
+//     // Contents to format
+    
+
+//     // If empty, return nothing!
+//     if (contents == '') {
+//         console.log('Contents are empty!');
+//         return;
+//     }
+
+//     // BIBTEX PARSER
+//     var bibtex = new BibTex();
+//     bibtex.content = contents;
+//     bibtex.parse();
+
+
+//     // For each parsed citation
+//     for (var i in bibtex.data) {
+
+//         // Get citation
+//         var citation = bibtex.data[i];
+
+//         // Format citation
+//         // Citation style: amslike
+//         var output = format(citation);
+//         // console.log('output: ' + output);
+//         // console.log('htmlify:' + htmlify(output));
+//         // Show
+
+//         var t = "<li><p style=\"display: inline\">"+ htmlify(output) + "<pre style=\"display: inline\">";
+//         if ( citation.hasOwnProperty("arxiv") ) {
+//             t += " <a href=\""+citation["arxiv"] +"\">arXiv</a>";
+//         }
+
+//         if ( citation["entryType"] !== "unpublished" ) {
+//             t += " <a download=\""+ citation["cite"] +".bib\" href=\"data:application/octet-stream;charset=utf-8,"+ encodeURIComponent(citation["originalContent"]) + " \">bib</a>";
+//         }
+//         t += "</pre></p></li>";
+
+//         papers.innerHTML += t;
+
+//     }
+ 
+//     MathJax.typeset();
+// //    console.log(papers.innerHTML)
+// }
+
+
+init();
+
+getPapers();
 getThesis();
