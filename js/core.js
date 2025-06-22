@@ -201,7 +201,6 @@ function format(data) {
                 ((data.pages) ? ",&nbsp;" + data.pages : "") +
                 ((data.doi && data.url) ? ", doi:&nbsp;<a href=\""+ data.url +"\">"+ data.doi + "</a>" : "") +
                 ((data.mrnumber) ? ", MR&nbsp"+data.mrnumber : "")+              
-//                ((data.doi) ? ", doi:&nbsp;" + data.doi : "") +                
                 ".";
         }
         else if (formatValue == 'harvard') {
@@ -271,6 +270,7 @@ function format(data) {
                 ",&nbsp;" + year  +
                 ((data.doi && data.url) ? ", doi:&nbsp;<a href=\""+ data.url +"\">"+ data.doi + "</a>" : "") + 
                 ((data.mrnumber) ? ", MR&nbsp"+data.mrnumber : "")+
+                ((data.note) ? ", "+data.note : "")+
                 "."
             }
         else if (formatValue == 'harvard') {
@@ -492,6 +492,9 @@ function addEntry(citation) {
     // }
 
     if ( citation.hasOwnProperty("pdf") ) {
+		if ( !citation.hasOwnProperty("arxiv") ) 
+			t+="  "
+
         t += " <a href=\"pdf/"+citation["pdf"] +"\">pdf</a>";
     }
 
@@ -524,9 +527,13 @@ function getPapers() {
         papers.innerHTML += "<div class=\"paper_notes\">This is an extended version of the <a href=\"pdf/GPVweaknessDSCiE.pdf\">homonymous paper</a>, published in " + htmlify(format(bibliography.data[getIndex("GPVweaknessDSCiE")])).substring(143,) + "<br><br></div></li>";
         
         papers.innerHTML += "<li>" +  addEntry(bibliography.data[getIndex("ALMMVJump")]) + "</li>";
-        papers.innerHTML += "<li>" +  addEntry(bibliography.data[getIndex("DSVTreeTheorem")]) + "</li>";
-        papers.innerHTML += "<li>" +  addEntry(bibliography.data[getIndex("CMVCantorBendixon")]) + "</li>";
-        papers.innerHTML += "<li>" +  addEntry(bibliography.data[getIndex("TVdP2022")]) + "</li>";
+		papers.innerHTML += "<li>" +  addEntry(bibliography.data[getIndex("DSVTreeTheorem")]) + "</li>";
+		papers.innerHTML += "<li>" +  addEntry(bibliography.data[getIndex("CMVCantorBendixon")]) + "</li>";
+
+
+		papers.innerHTML += "<li>" +  addEntry(bibliography.data[getIndex("NPPV25")]) + "</li>";
+		papers.innerHTML += "<li>" +  addEntry(bibliography.data[getIndex("FNPPV25")]) + "</li>";
+		papers.innerHTML += "<li>" +  addEntry(bibliography.data[getIndex("TVdP2022")]) + "</li>";
         papers.innerHTML += "<li>" +  addEntry(bibliography.data[getIndex("LMPMVMinimalCovers")]) + "</li>";
 
         papers.innerHTML += "<li>" +  addEntry(bibliography.data[getIndex("SVFirstOrderPart")]) + "</li>";
