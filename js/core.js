@@ -528,7 +528,7 @@ function getPapers() {
         
         papers.innerHTML += "<li>" +  addEntry(bibliography.data[getIndex("ALMMVJump")]) + "</li>";
 		papers.innerHTML += "<li>" +  addEntry(bibliography.data[getIndex("DSVTreeTheorem")]) + "</li>";
-		papers.innerHTML += "<li>" +  addEntry(bibliography.data[getIndex("CMVCantorBendixon")]) + "</li>";
+		papers.innerHTML += "<li>" +  addEntry(bibliography.data[getIndex("CMVCantorBendixson")]) + "</li>";
 
 
 		papers.innerHTML += "<li>" +  addEntry(bibliography.data[getIndex("NPPV25")]) + "</li>";
