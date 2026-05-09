@@ -522,21 +522,18 @@ function getPapers() {
         papers.innerHTML = '';
 
         papers.innerHTML += "<li>" +  addEntry(bibliography.data[getIndex("LMVChains")]) + "</li>";
-
-        papers.innerHTML += "<li>" +  addEntry(bibliography.data[getIndex("ALMMVJump")]) + "</li>";
 	
 		papers.innerHTML += "<li>" +  addEntry(bibliography.data[getIndex("GPVweaknessDS")]);
         papers.innerHTML += "<div class=\"paper_notes\">This is an extended version of the <a href=\"pdf/GPVweaknessDSCiE.pdf\">homonymous paper</a>, published in " + htmlify(format(bibliography.data[getIndex("GPVweaknessDSCiE")])).substring(143,) + "<br><br></div></li>";
         
 		papers.innerHTML += "<li>" +  addEntry(bibliography.data[getIndex("DSVTreeTheorem")]) + "</li>";
+
+        papers.innerHTML += "<li>" +  addEntry(bibliography.data[getIndex("ALMMVJump")]) + "</li>";
 		papers.innerHTML += "<li>" +  addEntry(bibliography.data[getIndex("CMVCantorBendixson")]) + "</li>";
-
-
 		papers.innerHTML += "<li>" +  addEntry(bibliography.data[getIndex("NPPV25")]) + "</li>";
 		papers.innerHTML += "<li>" +  addEntry(bibliography.data[getIndex("FNPPV25")]) + "</li>";
 		papers.innerHTML += "<li>" +  addEntry(bibliography.data[getIndex("TVdP2022")]) + "</li>";
         papers.innerHTML += "<li>" +  addEntry(bibliography.data[getIndex("LMPMVMinimalCovers")]) + "</li>";
-
         papers.innerHTML += "<li>" +  addEntry(bibliography.data[getIndex("SVFirstOrderPart")]) + "</li>";
         papers.innerHTML += "<li>" +  addEntry(bibliography.data[getIndex("MVEffSalem")]) + "</li>";
         papers.innerHTML += "<li>" +  addEntry(bibliography.data[getIndex("MVSalem")]) + "</li>";
